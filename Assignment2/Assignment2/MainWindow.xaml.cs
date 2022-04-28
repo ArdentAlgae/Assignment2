@@ -24,82 +24,13 @@ namespace Assignment2
         {
             InitializeComponent();
 
-            gridList.ItemsSource = getStaff();
+            HomeView home = new HomeView();
+            setBody(home);
         }
-
-        List<Unit> getUnits()
+        public void setBody(UserControl body)
         {
-            List<Unit> units = new List<Unit>();
-            units.Add(new Unit() {
-                unitNum = 1,
-                unitName = "Jeff",
-            });
-            units.Add(new Unit()
-            {
-                unitNum = 2,
-                unitName = "Geoff",
-            });
-            return units;
-        }
-
-        List<Staff> getStaff()
-        {
-            List<Staff> units = new List<Staff>();
-            units.Add(new Staff()
-            {
-                staffNum = 3,
-                staffName = "Frank",
-            });
-            units.Add(new Staff()
-            {
-                staffNum = 4,
-                staffName = "Craig",
-            });
-            return units;
-        }
-
-        private void click(object sender, RoutedEventArgs e)
-        {
-            if(sender.Equals(staffButton))
-            {
-                gridList.ItemsSource = getStaff();
-                gridList.Items.Refresh();
-            }
-            else if(sender.Equals(unitButton))
-            {
-                gridList.ItemsSource = getUnits();
-                gridList.Items.Refresh();
-            }
-            /*else if (sender.Equals(classButton))
-            {
-                gridList.ItemsSource = getClasses();
-                gridList.Items.Refresh();
-            }
-            else if (sender.Equals(consultationButton))
-            {
-                gridList.ItemsSource = getConsultations();
-                gridList.Items.Refresh();
-            }*/
-        }
-    }
-
-    public class Unit
-    {
-        public int unitNum { get; set; }
-        public string unitName { get; set; }
-        public Unit()
-        {
-            
-        }
-    }
-
-    public class Staff
-    {
-        public int staffNum { get; set; }
-        public string staffName { get; set; }
-        public Staff()
-        {
-
+            BodyContainer.Children.Clear();
+            BodyContainer.Children.Add(body);
         }
     }
 }
