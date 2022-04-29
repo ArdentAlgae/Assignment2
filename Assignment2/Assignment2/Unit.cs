@@ -8,8 +8,9 @@ namespace Assignment2
 {
     public class Unit
     {
-        public int unitNum { get; set; }
+        public string unitCode { get; set; }
         public string unitName { get; set; }
+        public int unitCoordinator { get; set; }
         public Unit()
         {
 

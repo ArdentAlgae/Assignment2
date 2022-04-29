@@ -33,13 +33,15 @@ namespace Assignment2
             List<Unit> units = new List<Unit>();
             units.Add(new Unit()
             {
-                unitNum = 1,
-                unitName = "Jeff",
+                unitCode = "KMA123",
+                unitName = "How to make jorts",
+                unitCoordinator = 456
             });
             units.Add(new Unit()
             {
-                unitNum = 2,
-                unitName = "Geoff",
+                unitCode = "KMA789",
+                unitName = "How not to make jorts",
+                unitCoordinator = 101112
             });
             return units;
         }
@@ -49,13 +51,63 @@ namespace Assignment2
             List<Staff> units = new List<Staff>();
             units.Add(new Staff()
             {
-                staffNum = 3,
-                staffName = "Frank",
+                staffID = 456,
+                givenName = "Frank",
+                familyName = "Jhonson",
+                title = "Prof.",
+                campus = "Sandy Bay",
+                phone = 1234567890,
+                room = "02GHT834",
+                email = "frank.jhonson@utas.edu.au"
             });
             units.Add(new Staff()
             {
-                staffNum = 4,
-                staffName = "Craig",
+                staffID = 101112,
+                givenName = "Craig",
+                familyName = "Phillips",
+                title = "Dr",
+                campus = "Launceston",
+                phone = 0987654321,
+                room = "03PWF175",
+                email = "Craig.Phillips2@utas.edu.au"
+            });
+            return units;
+        }
+
+        List<Class> getClasses()
+        {
+            List<Class> units = new List<Class>();
+            units.Add(new Class()
+            {
+                unitCode = "KMA123",
+                campus = "Sandy Bay",
+                day = "Friday"
+            });
+            units.Add(new Class()
+            {
+                unitCode = "KMA789",
+                campus = "Launceston",
+                day = "Thursday"
+            });
+            return units;
+        }
+
+        List<Consultation> getConsultations()
+        {
+            List<Consultation> units = new List<Consultation>();
+            units.Add(new Consultation()
+            {
+                staffID = 456,
+                day = "Monday",
+                startTime = 13,
+                endTime = 15
+            });
+            units.Add(new Consultation()
+            {
+                staffID = 101112,
+                day = "Tuesday",
+                startTime = 9,
+                endTime = 11
             });
             return units;
         }
@@ -74,16 +126,18 @@ namespace Assignment2
                 gridList.Items.Refresh();
                 typeSelected = 'u';
             }
-            /*else if (sender.Equals(classButton))
+            else if (sender.Equals(classButton))
             {
                 gridList.ItemsSource = getClasses();
                 gridList.Items.Refresh();
+                typeSelected = 'c';
             }
             else if (sender.Equals(consultationButton))
             {
                 gridList.ItemsSource = getConsultations();
                 gridList.Items.Refresh();
-            }*/
+                typeSelected = 'o';
+            }
         }
 
 
@@ -109,23 +163,41 @@ namespace Assignment2
                 else if (typeSelected == 'c')
                 {
                     List<Class> classList = (List<Class>)gridList.ItemsSource;
-                    AddStaffView view = new AddStaffView(classList[row.GetIndex()]);
+                    AddClassView view = new AddClassView(classList[row.GetIndex()]);
                     Body.setBody(view);
                 }
                 else if (typeSelected == 'o')
                 {
                     List<Consultation> consultationList = (List<Consultation>)gridList.ItemsSource;
-                    AddStaffView view = new AddStaffView(consultationList[row.GetIndex()]);
+                    AddConsultationView view = new AddConsultationView(consultationList[row.GetIndex()]);
                     Body.setBody(view);
                 }
             }
 
         }
 
-        private void AddUnit_Click(object sender, RoutedEventArgs e)
+        private void NewEntry_Click(object sender, RoutedEventArgs e)
         {
-            AddUnitView view = new AddUnitView(new Unit());
-            Body.setBody(view);
+            if (typeSelected == 's')
+            {
+                AddStaffView view = new AddStaffView(new Staff());
+                Body.setBody(view);
+            }
+            else if (typeSelected == 'u')
+            {
+                AddUnitView view = new AddUnitView(new Unit());
+                Body.setBody(view);
+            }
+            else if (typeSelected == 'c')
+            {
+                AddClassView view = new AddClassView(new Class());
+                Body.setBody(view);
+            }
+            else if (typeSelected == 'o')
+            {
+                AddConsultationView view = new AddConsultationView(new Consultation());
+                Body.setBody(view);
+            }
         }
     }
 }

@@ -55,6 +55,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddClassView.xaml.cs">
+      <DependentUpon>AddClassView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddConsultationView.xaml.cs">
+      <DependentUpon>AddConsultationView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddStaffView.xaml.cs">
       <DependentUpon>AddStaffView.xaml</DependentUpon>
     </Compile>
@@ -62,8 +68,18 @@
       <DependentUpon>AddUnitView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Body.cs" />
+    <Compile Include="Class.cs" />
+    <Compile Include="Consultation.cs" />
     <Compile Include="Staff.cs" />
     <Compile Include="Unit.cs" />
+    <Page Include="AddClassView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddConsultationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AddStaffView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
