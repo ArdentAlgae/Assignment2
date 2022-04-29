@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Assignment2
 {
     /// <summary>
-    /// Interaction logic for AddUnitView.xaml
+    /// Interaction logic for AddStaffView.xaml
     /// </summary>
-    public partial class AddUnitView : UserControl
+    public partial class AddStaffView : UserControl
     {
-        public AddUnitView(Unit unit)
+        public AddStaffView(Staff staff)
         {
             InitializeComponent();
 

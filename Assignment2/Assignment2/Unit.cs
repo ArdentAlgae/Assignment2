@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Assignment2
 {
-    class Unit
+    public class Unit
     {
         public int unitNum { get; set; }
         public string unitName { get; set; }

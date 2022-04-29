@@ -20,6 +20,7 @@ namespace Assignment2
     /// </summary>
     public partial class HomeView : UserControl
     {
+        char typeSelected = 's';
         public HomeView()
         {
             InitializeComponent();
@@ -65,11 +66,13 @@ namespace Assignment2
             {
                 gridList.ItemsSource = getStaff();
                 gridList.Items.Refresh();
+                typeSelected = 's';
             }
             else if (sender.Equals(unitButton))
             {
                 gridList.ItemsSource = getUnits();
                 gridList.Items.Refresh();
+                typeSelected = 'u';
             }
             /*else if (sender.Equals(classButton))
             {
@@ -83,9 +86,45 @@ namespace Assignment2
             }*/
         }
 
+
+
+        private void selectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DataGrid dataGrid = sender as DataGrid;
+            if (e.AddedItems != null && e.AddedItems.Count > 0)
+            {
+                DataGridRow row = (DataGridRow)dataGrid.ItemContainerGenerator.ContainerFromItem(e.AddedItems[0]);
+                if (typeSelected == 'u')
+                {
+                    List<Unit> unitList = (List<Unit>)gridList.ItemsSource;
+                    AddUnitView view = new AddUnitView(unitList[row.GetIndex()]);
+                    Body.setBody(view);
+                }
+                else if (typeSelected == 's')
+                {
+                    List<Staff> staffList = (List<Staff>)gridList.ItemsSource;
+                    AddStaffView view = new AddStaffView(staffList[row.GetIndex()]);
+                    Body.setBody(view);
+                }
+                else if (typeSelected == 'c')
+                {
+                    List<Class> classList = (List<Class>)gridList.ItemsSource;
+                    AddStaffView view = new AddStaffView(classList[row.GetIndex()]);
+                    Body.setBody(view);
+                }
+                else if (typeSelected == 'o')
+                {
+                    List<Consultation> consultationList = (List<Consultation>)gridList.ItemsSource;
+                    AddStaffView view = new AddStaffView(consultationList[row.GetIndex()]);
+                    Body.setBody(view);
+                }
+            }
+
+        }
+
         private void AddUnit_Click(object sender, RoutedEventArgs e)
         {
-            AddUnitView view = new AddUnitView();
+            AddUnitView view = new AddUnitView(new Unit());
             Body.setBody(view);
         }
     }

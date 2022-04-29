@@ -17,7 +17,7 @@
             <Button x:Name="classButton" Content="Classes" Width="150" Click="click"/>
             <Button x:Name="consultationButton" Content="Consultations" Width="150" Click="click"/>
         </StackPanel>
-        <DataGrid x:Name="gridList" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="204" Margin="61,165,0,0" VerticalAlignment="Top" Width="679" IsReadOnly="True"/>
+        <DataGrid x:Name="gridList" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="204" Margin="61,165,0,0" VerticalAlignment="Top" Width="679" IsReadOnly="True" SelectionChanged="selectionChanged"/>
         <Button x:Name="AddUnit" Grid.ColumnSpan="2" Content="Add Unit" HorizontalAlignment="Left" Margin="365,382,0,0" VerticalAlignment="Top" Width="75" Click="AddUnit_Click"/>
 
     </Grid>

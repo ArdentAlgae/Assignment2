@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace Assignment2
 {
-    class Staff
+    public class Staff
     {
-        public int staffNum { get; set; }
-        public string staffName { get; set; }
+        public int staffID { get; set; }
+        public string givenName { get; set; }
+        public string familyName { get; set; }
+        public string tut { get; set; }
         public Staff()
         {
 

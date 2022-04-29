@@ -55,12 +55,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddStaffView.xaml.cs">
+      <DependentUpon>AddStaffView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddUnitView.xaml.cs">
       <DependentUpon>AddUnitView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Body.cs" />
     <Compile Include="Staff.cs" />
     <Compile Include="Unit.cs" />
+    <Page Include="AddStaffView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AddUnitView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
