@@ -55,8 +55,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AddClassView.xaml.cs">
-      <DependentUpon>AddClassView.xaml</DependentUpon>
+    <Compile Include="ClassView.xaml.cs">
+      <DependentUpon>ClassView.xaml</DependentUpon>
     </Compile>
     <Compile Include="AddConsultationView.xaml.cs">
       <DependentUpon>AddConsultationView.xaml</DependentUpon>
@@ -70,9 +70,13 @@
     <Compile Include="Body.cs" />
     <Compile Include="Class.cs" />
     <Compile Include="Consultation.cs" />
+    <Compile Include="DatabaseController.cs" />
+    <Compile Include="EditClassView.xaml.cs">
+      <DependentUpon>EditClassView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Staff.cs" />
     <Compile Include="Unit.cs" />
-    <Page Include="AddClassView.xaml">
+    <Page Include="ClassView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -85,6 +89,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AddUnitView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditClassView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
