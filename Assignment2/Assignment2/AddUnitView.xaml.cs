@@ -23,8 +23,6 @@ namespace Assignment2
         public AddUnitView(Unit unit)
         {
             InitializeComponent();
-            string[] columns = { "code", "title", "coordinator" };
-            Connection.readData("unit", columns);
 
         }
 
