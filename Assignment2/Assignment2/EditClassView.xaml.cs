@@ -56,19 +56,34 @@ namespace Assignment2
                 using(var conn = new MySqlConnection("Database=hris;Data Source=alacritas.cis.utas.edu.au;User Id=kit206g2a;Password=group2a"))
                 {
                     conn.Open();
-                    MySqlCommand cmd = new MySqlCommand("UPDATE unit_code, campus, day, start, end, type, room, staff from class", conn);
+                    MySqlCommand cmd = new MySqlCommand("SELECT unit_code, campus, day, start, end, type, room, staff from class", conn);
 
                     MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
+
+                    adp.UpdateCommand = new MySqlCommand("UPDATE class SET unit_code=@unit_code, " + // campus=@campus, day=@day, start=@start, end=@end, type=@type, "+
+                        "room=@room, staff=@staff WHERE unit_code=@old_unit_code", conn);
+
+                    adp.UpdateCommand.Parameters.Add("@unit_code", MySqlDbType.VarChar, 6, "unit_code");
+                    //adp.UpdateCommand.Parameters.Add("@campus", MySqlDbType.VarChar, 40, "campus");
+                    //adp.UpdateCommand.Parameters.Add("@day", MySqlDbType.VarChar, 40, "day");
+                    //adp.UpdateCommand.Parameters.Add("@start", MySqlDbType.VarChar, 40, "start");
+                    //adp.UpdateCommand.Parameters.Add("@end", MySqlDbType.VarChar, 40, "end");
+                    //adp.UpdateCommand.Parameters.Add("@type", MySqlDbType.VarChar, 40, "type");
+                    adp.UpdateCommand.Parameters.Add("@room", MySqlDbType.VarChar, 20, "room");
+                    adp.UpdateCommand.Parameters.Add("@staff", MySqlDbType.Int32, 11, "staff").SourceVersion = DataRowVersion.Original;
+                    adp.UpdateCommand.Parameters.Add("@old_unit_code", MySqlDbType.VarChar, 6, "unit_code").SourceVersion = DataRowVersion.Original;
+
                     DataTable dt = new DataTable("class");
-                    foreach(DataRow row in dt.Rows)
+                    adp.Fill(dt);
+                    foreach (DataRow row in dt.Rows)
                     {
                         if (sameClass(class_, row))
                         {
                             row["unit_code"] = newClass.unitCode;
                             row["campus"] = newClass.campus;
                             row["day"] = newClass.day;
-                            row["start_time"] = newClass.startTime;
-                            row["end_time"] = newClass.endTime;
+                            row["start"] = newClass.startTime;
+                            row["end"] = newClass.endTime;
                             row["type"] = newClass.type;
                             row["room"] = newClass.room;
                             row["staff"] = newClass.staff;
@@ -107,11 +122,11 @@ namespace Assignment2
             {
                 isTrue = false;
             }
-            else if (class_.startTime.Equals(row["start_time"]))
+            else if (class_.startTime.Equals(row["start"]))
             {
                 isTrue = false;
             }
-            else if (class_.endTime.Equals(row["end_time"]))
+            else if (class_.endTime.Equals(row["end"]))
             {
                 isTrue = false;
             }
