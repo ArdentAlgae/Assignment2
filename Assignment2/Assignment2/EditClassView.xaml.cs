@@ -33,11 +33,11 @@ namespace Assignment2
             unitCodeTextBox.Text = class_.unitCode;
             campusTextBox.Text = class_.campus;
             dayTextBox.Text = class_.day;
-            startTimeTextBox.Text = class_.startTime;
-            endTimeTextBox.Text = class_.endTime;
+            startTimeTextBox.Text = class_.startTime.ToString();
+            endTimeTextBox.Text = class_.endTime.ToString();
             typeTextBox.Text = class_.type;
             roomTextBox.Text = class_.room;
-            staffTextBox.Text = class_.staff;
+            staffTextBox.Text = class_.staff.ToString();
         }
 
         private void ConfirmButton_Clicked(object sender, RoutedEventArgs e)
@@ -52,48 +52,40 @@ namespace Assignment2
                 newClass.endTime = TimeSpan.Parse(endTimeTextBox.Text);
                 newClass.type = typeTextBox.Text;
                 newClass.room = roomTextBox.Text;
-                newClass.staff = staffTextBox.Text;
+                newClass.staff = Int32.Parse(staffTextBox.Text);
                 using(var conn = new MySqlConnection("Database=hris;Data Source=alacritas.cis.utas.edu.au;User Id=kit206g2a;Password=group2a"))
                 {
                     conn.Open();
-                    MySqlCommand cmd = new MySqlCommand("SELECT unit_code, campus, day, start, end, type, room, staff from class", conn);
+                    MySqlCommand cmd = new MySqlCommand("UPDATE class" +
+                        " SET unit_code=@NewUnitCode," +
+                        " campus=@NewCampus," +
+                        " day=@NewDay," +
+                        " start=@NewStartTime," +
+                        " end=@NewEndTime," +
+                        " type=@NewType," +
+                        " room=@NewRoom," +
+                        " staff=@NewStaff" +
+                        " WHERE unit_code=@UnitCode" +
+                        " AND campus=@Campus" +
+                        " AND day=@Day" +
+                        " AND start=@StartTime", conn);
 
-                    MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
+                    cmd.Parameters.AddWithValue("@NewUnitCode", newClass.unitCode);
+                    cmd.Parameters.AddWithValue("@NewCampus", newClass.campus);
+                    cmd.Parameters.AddWithValue("@NewDay", newClass.day);
+                    cmd.Parameters.AddWithValue("@NewStartTime", newClass.startTime);
+                    cmd.Parameters.AddWithValue("@NewEndTime", newClass.endTime);
+                    cmd.Parameters.AddWithValue("@NewType", newClass.type);
+                    cmd.Parameters.AddWithValue("@NewRoom", newClass.room);
+                    cmd.Parameters.AddWithValue("@NewStaff", newClass.staff);
 
-                    adp.UpdateCommand = new MySqlCommand("UPDATE class SET unit_code=@unit_code, campus=@campus, day=@day, start=@start, end=@end, type=@type, " +
-                        "room=@room, staff=@staff WHERE unit_code=@old_unit_code, campus=@old_campus, day=@old_day, start=@old_start", conn);
+                    cmd.Parameters.AddWithValue("@UnitCode", class_.unitCode);
+                    cmd.Parameters.AddWithValue("@Campus", class_.campus);
+                    cmd.Parameters.AddWithValue("@Day", class_.day);
+                    cmd.Parameters.AddWithValue("@StartTime", class_.startTime);
 
-                    adp.UpdateCommand.Parameters.Add("@unit_code", MySqlDbType.VarChar, 6, "unit_code");
-                    adp.UpdateCommand.Parameters.Add("@campus", MySqlDbType.Enum, 2, "campus");
-                    adp.UpdateCommand.Parameters.Add("@day", MySqlDbType.Enum, 7, "day");
-                    adp.UpdateCommand.Parameters.Add("@start", MySqlDbType.Time, 0, "start");
-                    adp.UpdateCommand.Parameters.Add("@end", MySqlDbType.Time, 0, "end");
-                    adp.UpdateCommand.Parameters.Add("@type", MySqlDbType.Enum, 4, "type");
-                    adp.UpdateCommand.Parameters.Add("@room", MySqlDbType.VarChar, 20, "room");
-                    adp.UpdateCommand.Parameters.Add("@staff", MySqlDbType.Int32, 11, "staff");
-                    adp.UpdateCommand.Parameters.Add("@old_unit_code", MySqlDbType.VarChar, 6, "unit_code").SourceVersion = DataRowVersion.Original;
-                    adp.UpdateCommand.Parameters.Add("@old_campus", MySqlDbType.Enum, 2, "campus").SourceVersion = DataRowVersion.Original;
-                    adp.UpdateCommand.Parameters.Add("@old_day", MySqlDbType.Enum, 7, "day").SourceVersion = DataRowVersion.Original;
-                    adp.UpdateCommand.Parameters.Add("@old_start", MySqlDbType.Time, 0, "start").SourceVersion = DataRowVersion.Original;
-
-                    DataTable dt = new DataTable("class");
-                    adp.Fill(dt);
-                    foreach (DataRow row in dt.Rows)
-                    {
-                        if (sameClass(class_, row))
-                        {
-                            row["unit_code"] = newClass.unitCode;
-                            row["campus"] = newClass.campus;
-                            row["day"] = newClass.day;
-                            row["start"] = newClass.startTime;
-                            row["end"] = newClass.endTime;
-                            row["type"] = newClass.type;
-                            row["room"] = newClass.room;
-                            row["staff"] = newClass.staff;
-                        }
-                    }
-                    adp.Update(dt);
-                    
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
                 }
 
                 ClassView view = new ClassView(newClass);
