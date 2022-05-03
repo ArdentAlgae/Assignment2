@@ -33,5 +33,15 @@ namespace Assignment2
             HomeView home = new HomeView();
             Body.setBody(home);
         }
+
+        private void createButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DiscardButton_Clicked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
