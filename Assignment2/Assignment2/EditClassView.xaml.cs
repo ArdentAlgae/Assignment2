@@ -33,11 +33,11 @@ namespace Assignment2
             unitCodeTextBox.Text = class_.unitCode;
             campusTextBox.Text = class_.campus;
             dayTextBox.Text = class_.day;
-            startTimeTextBox.Text = class_.startTime.ToString();
-            endTimeTextBox.Text = class_.endTime.ToString();
+            startTimeTextBox.Text = class_.startTime;
+            endTimeTextBox.Text = class_.endTime;
             typeTextBox.Text = class_.type;
             roomTextBox.Text = class_.room;
-            staffTextBox.Text = class_.staff.ToString();
+            staffTextBox.Text = class_.staff;
         }
 
         private void ConfirmButton_Clicked(object sender, RoutedEventArgs e)
@@ -48,34 +48,44 @@ namespace Assignment2
                 newClass.unitCode = unitCodeTextBox.Text;
                 newClass.campus = campusTextBox.Text;
                 newClass.day = dayTextBox.Text;
-                newClass.startTime = Int32.Parse(startTimeTextBox.Text);
-                newClass.endTime = Int32.Parse(endTimeTextBox.Text);
+                newClass.startTime = startTimeTextBox.Text;
+                newClass.endTime = endTimeTextBox.Text;
                 newClass.type = typeTextBox.Text;
                 newClass.room = roomTextBox.Text;
-                newClass.staff = Int32.Parse(staffTextBox.Text);
+                newClass.staff = staffTextBox.Text;
                 using(var conn = new MySqlConnection("Database=hris;Data Source=alacritas.cis.utas.edu.au;User Id=kit206g2a;Password=group2a"))
                 {
                     conn.Open();
-                    MySqlCommand cmd = new MySqlCommand("UPDATE unit_code, campus, day, start, end, type, room, staff from class", conn);
+                    MySqlCommand cmd = new MySqlCommand("UPDATE class" +
+                        " SET unit_code=@NewUnitCode," +
+                        " campus=@NewCampus," +
+                        " day=@NewDay," +
+                        " start=@NewStartTime," +
+                        " end=@NewEndTime," +
+                        " type=@NewType," +
+                        " room=@NewRoom," +
+                        " staff=@NewStaff" +
+                        " WHERE unit_code=@UnitCode" +
+                        " AND campus=@Campus" +
+                        " AND day=@Day" +
+                        " AND start=@StartTime", conn);
 
-                    MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
-                    DataTable dt = new DataTable("class");
-                    foreach(DataRow row in dt.Rows)
-                    {
-                        if (sameClass(class_, row))
-                        {
-                            row["unit_code"] = newClass.unitCode;
-                            row["campus"] = newClass.campus;
-                            row["day"] = newClass.day;
-                            row["start_time"] = newClass.startTime;
-                            row["end_time"] = newClass.endTime;
-                            row["type"] = newClass.type;
-                            row["room"] = newClass.room;
-                            row["staff"] = newClass.staff;
-                        }
-                    }
-                    adp.Update(dt);
-                    
+                    cmd.Parameters.AddWithValue("@NewUnitCode", newClass.unitCode);
+                    cmd.Parameters.AddWithValue("@NewCampus", newClass.campus);
+                    cmd.Parameters.AddWithValue("@NewDay", newClass.day);
+                    cmd.Parameters.AddWithValue("@NewStartTime", newClass.startTime);
+                    cmd.Parameters.AddWithValue("@NewEndTime", newClass.endTime);
+                    cmd.Parameters.AddWithValue("@NewType", newClass.type);
+                    cmd.Parameters.AddWithValue("@NewRoom", newClass.room);
+                    cmd.Parameters.AddWithValue("@NewStaff", newClass.staff);
+
+                    cmd.Parameters.AddWithValue("@UnitCode", class_.unitCode);
+                    cmd.Parameters.AddWithValue("@Campus", class_.campus);
+                    cmd.Parameters.AddWithValue("@Day", class_.day);
+                    cmd.Parameters.AddWithValue("@StartTime", class_.startTime);
+
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
                 }
 
                 ClassView view = new ClassView(newClass);

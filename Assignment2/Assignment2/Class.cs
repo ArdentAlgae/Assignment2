@@ -11,11 +11,11 @@ namespace Assignment2
         public string unitCode { get; set; }
         public string campus { get; set; }
         public string day { get; set; }
-        public int startTime { get; set; }
-        public int endTime { get; set; }
+        public string startTime { get; set; }
+        public string endTime { get; set; }
         public string type { get; set; }
         public string room { get; set; }
-        public int staff { get; set; }
+        public string staff { get; set; }
         public Class()
         {
 

@@ -29,11 +29,11 @@ namespace Assignment2
             unitCodeText.Text = class_.unitCode;
             campusText.Text = class_.campus;
             dayText.Text = class_.day;
-            startTimeText.Text = class_.startTime.ToString();
-            endTimeText.Text = class_.endTime.ToString();
+            startTimeText.Text = class_.startTime;
+            endTimeText.Text = class_.endTime;
             typeText.Text = class_.type;
             roomText.Text = class_.room;
-            staffText.Text = class_.staff.ToString();
+            staffText.Text = class_.staff;
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

@@ -177,7 +177,7 @@ namespace Assignment2
                 }
                 else if (typeSelected == 'c')
                 {
-                    EditClassView view = new EditClassView(new Class(rowData));
+                    ClassView view = new ClassView(new Class(rowData));
                     Body.setBody(view);
                 }
                 else if (typeSelected == 'o')
