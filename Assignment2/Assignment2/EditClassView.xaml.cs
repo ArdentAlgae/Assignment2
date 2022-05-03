@@ -12,6 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data;
+using MySql.Data.MySqlClient;
+using System.Data.SqlClient;
+using System.Collections.ObjectModel;
 
 namespace Assignment2
 {
@@ -49,7 +53,22 @@ namespace Assignment2
                 newClass.type = typeTextBox.Text;
                 newClass.room = roomTextBox.Text;
                 newClass.staff = Int32.Parse(staffTextBox.Text);
-                DatabaseController.replaceClass(class_, newClass);
+                using(var conn = new MySqlConnection("connectionString"))
+                {
+                    conn.Open();
+                    var sql = "INSERT INTO class((unit_code, campus, day, start, end, type, room, staff) VALUES(@unitCode @campus @day @startTime @endTime @type @room @staff)";
+                    using(var cmd = new MySqlCommand(sql, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@unitCode", newClass.unitCode);
+                        cmd.Parameters.AddWithValue("@campus", newClass.campus);
+                        cmd.Parameters.AddWithValue("@day", newClass.day);
+                        cmd.Parameters.AddWithValue("@startTime", newClass.startTime);
+                        cmd.Parameters.AddWithValue("@endTime", newClass.endTime);
+                        cmd.Parameters.AddWithValue("@type", newClass.type);
+                        cmd.Parameters.AddWithValue("@room", newClass.room);
+                        cmd.Parameters.AddWithValue("@staff", newClass.staff);
+                    }
+                }
 
                 ClassView view = new ClassView(newClass);
                 Body.setBody(view);
