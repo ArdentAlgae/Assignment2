@@ -182,8 +182,7 @@ namespace Assignment2
                 }
                 else if (typeSelected == 'o')
                 {
-                    List<Consultation> consultationList = (List<Consultation>)gridList.ItemsSource;
-                    AddConsultationView view = new AddConsultationView(consultationList[row.GetIndex()]);
+                    AddConsultationView view = new AddConsultationView(new Consultation(rowData));
                     Body.setBody(view);
                 }
             }
@@ -199,12 +198,12 @@ namespace Assignment2
             }
             else if (typeSelected == 'u')
             {
-                AddUnitView view = new AddUnitView(new Unit(null));
+                AddUnitView view = new AddUnitView(new Unit());
                 Body.setBody(view);
             }
             else if (typeSelected == 'c')
             {
-                ClassView view = new ClassView(new Class());
+                AddClassView view = new AddClassView(new Class());
                 Body.setBody(view);
             }
             else if (typeSelected == 'o')
