@@ -7,8 +7,24 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Label Content="Add Staff View (Under Construction)" HorizontalAlignment="Left" Margin="302,216,0,0" VerticalAlignment="Top"/>
         <Button x:Name="BackButton" Content="&lt; Back" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,10,0,0" Click="BackButton_Click"/>
-
+        <TextBlock x:Name="unitCodeHeader" Text="Unit Code: " HorizontalAlignment="Left" Margin="20,60,0,0" VerticalAlignment="Top"/>
+        <TextBlock x:Name="unitCodeText" HorizontalAlignment="Left" Margin="100,60,0,0" VerticalAlignment="Top"/>
+        <TextBlock x:Name="campusHeader" Text="Campus: " HorizontalAlignment="Left" Margin="20,80,0,0" VerticalAlignment="Top"/>
+        <TextBlock x:Name="campusText" HorizontalAlignment="Left" Margin="100,80,0,0" VerticalAlignment="Top"/>
+        <TextBlock x:Name="dayType" Text="Day: " HorizontalAlignment="Left" Margin="20,100,0,0" VerticalAlignment="Top"/>
+        <TextBlock x:Name="dayText" HorizontalAlignment="Left" Margin="100,100,0,0" VerticalAlignment="Top"/>
+        <TextBlock x:Name="startTimeType" Text="Start Time: " HorizontalAlignment="Left" Margin="20,120,0,0" VerticalAlignment="Top"/>
+        <TextBlock x:Name="startTimeText" HorizontalAlignment="Left" Margin="100,120,0,0" VerticalAlignment="Top"/>
+        <TextBlock x:Name="endTimeType" Text="End Time: " HorizontalAlignment="Left" Margin="20,140,0,0" VerticalAlignment="Top"/>
+        <TextBlock x:Name="endTimeText" HorizontalAlignment="Left" Margin="100,140,0,0" VerticalAlignment="Top"/>
+        <TextBlock x:Name="typeType" Text="Type: " HorizontalAlignment="Left" Margin="20,160,0,0" VerticalAlignment="Top"/>
+        <TextBlock x:Name="typeText" HorizontalAlignment="Left" Margin="100,160,0,0" VerticalAlignment="Top"/>
+        <TextBlock x:Name="roomType" Text="Room: " HorizontalAlignment="Left" Margin="20,180,0,0" VerticalAlignment="Top"/>
+        <TextBlock x:Name="roomText" HorizontalAlignment="Left" Margin="100,180,0,0" VerticalAlignment="Top"/>
+        <TextBlock x:Name="staffType" Text="Staff: " HorizontalAlignment="Left" Margin="20,200,0,0" VerticalAlignment="Top"/>
+        <TextBlock x:Name="staffText" HorizontalAlignment="Left" Margin="100,200,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="editButton" Content="Edit Class" HorizontalAlignment="Left" Margin="212,324,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="deleteButton" Content="Delete Class" HorizontalAlignment="Left" Margin="404,324,0,0" VerticalAlignment="Top" Width="75"/>
     </Grid>
 </UserControl>
