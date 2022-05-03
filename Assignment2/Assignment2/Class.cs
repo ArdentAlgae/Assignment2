@@ -20,5 +20,13 @@ namespace Assignment2
         {
 
         }
+        public Class(object[] rowData)
+        {
+            unitCode = (string)rowData[0];
+            campus = (string)rowData[1];
+            day = (string)rowData[2];
+            type = (string)rowData[5];
+            room = (string)rowData[6];
+        }
     }
 }

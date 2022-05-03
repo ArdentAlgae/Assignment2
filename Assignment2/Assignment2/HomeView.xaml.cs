@@ -163,22 +163,21 @@ namespace Assignment2
             if (e.AddedItems != null && e.AddedItems.Count > 0)
             {
                 DataGridRow row = (DataGridRow)dataGrid.ItemContainerGenerator.ContainerFromItem(e.AddedItems[0]);
+                DataRowView rowView = (DataRowView) e.AddedItems[0];
+                object[] rowData = rowView.Row.ItemArray;
                 if (typeSelected == 'u')
                 {
-                    List<Unit> unitList = (List<Unit>)gridList.ItemsSource;
-                    AddUnitView view = new AddUnitView(unitList[row.GetIndex()]);
+                    AddUnitView view = new AddUnitView(new Unit(rowData));
                     Body.setBody(view);
                 }
                 else if (typeSelected == 's')
                 {
-                    List<Staff> staffList = (List<Staff>)gridList.ItemsSource;
-                    EditStaffView view = new EditStaffView(staffList[row.GetIndex()]);
+                    EditStaffView view = new EditStaffView(new Staff(rowData));
                     Body.setBody(view);
                 }
                 else if (typeSelected == 'c')
                 {
-                    List<Class> classList = (List<Class>)gridList.ItemsSource;
-                    ClassView view = new ClassView(classList[row.GetIndex()]);
+                    EditClassView view = new EditClassView(new Class(rowData));
                     Body.setBody(view);
                 }
                 else if (typeSelected == 'o')
@@ -200,7 +199,7 @@ namespace Assignment2
             }
             else if (typeSelected == 'u')
             {
-                AddUnitView view = new AddUnitView(new Unit());
+                AddUnitView view = new AddUnitView(new Unit(null));
                 Body.setBody(view);
             }
             else if (typeSelected == 'c')

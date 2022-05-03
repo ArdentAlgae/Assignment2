@@ -11,9 +11,11 @@ namespace Assignment2
         public string unitCode { get; set; }
         public string unitName { get; set; }
         public int unitCoordinator { get; set; }
-        public Unit()
+        public Unit(object[] rowData)
         {
-
+            unitCode = (string) rowData[0];
+            unitName = (string) rowData[1];
+            unitCoordinator = (int) rowData[2];
         }
     }
 }
