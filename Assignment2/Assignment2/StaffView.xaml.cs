@@ -12,17 +12,22 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO;
 
 namespace Assignment2
 {
     /// <summary>
-    /// Interaction logic for EditStaffView.xaml
+    /// Interaction logic for StaffView.xaml
     /// </summary>
-    public partial class EditStaffView : UserControl
+    public partial class StaffView : UserControl
     {
-        public EditStaffView(Staff staff)
+        private Staff _staff;
+
+        public StaffView(Staff staff)
         {
             InitializeComponent();
+
+            _staff = staff;
 
             staffIDTextBox.Text = staff.staffID.ToString();
             givenNameTextBox.Text = staff.givenName;
@@ -32,25 +37,26 @@ namespace Assignment2
             roomTextBox.Text = staff.room;
             phoneTextBox.Text = staff.phone;
             emailTextBox.Text = staff.email;
-        }
 
-        private void ConfirmButton_Clicked(object sender, RoutedEventArgs e)
-        {
-
-            if (MessageBox.Show("Save class?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-            {
-                Staff newStaff = new Staff();
-                newStaff.staffID = Int32.Parse(staffIDTextBox.Text);
-
-                StaffView view = new StaffView(newStaff);
-                Body.setBody(view);
+            if (staff.profile.Length != 0) {
+                MemoryStream stream = new MemoryStream(staff.profile);
+                BitmapImage image = new BitmapImage();
+                image.BeginInit();
+                image.StreamSource = stream;
+                image.EndInit();
+                profile.Source = image;
             }
         }
 
-        private void DiscardButton_Clicked(object sender, RoutedEventArgs e)
+        private void EditButton_Click(object sender, RoutedEventArgs e)
         {
-            HomeView home = new HomeView();
-            Body.setBody(home);
+            EditStaffView view = new EditStaffView(_staff);
+            Body.setBody(view);
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
 
         private void BackButton_Clicked(object sender, RoutedEventArgs e)

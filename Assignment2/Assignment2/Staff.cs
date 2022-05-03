@@ -16,6 +16,7 @@ namespace Assignment2
         public string phone { get; set; }
         public string room { get; set; }
         public string email { get; set; }
+        public byte[] profile;
         public Staff()
         {
 
@@ -30,6 +31,7 @@ namespace Assignment2
             phone = (string) rowData[5];
             room = (string) rowData[6];
             email = (string) rowData[7];
+            profile = (byte[])rowData[8];
         }
     }
 }

@@ -121,6 +121,9 @@
       <DependentUpon>EditStaffView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Staff.cs" />
+    <Compile Include="StaffView.xaml.cs">
+      <DependentUpon>StaffView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Unit.cs" />
     <Page Include="ClassView.xaml">
       <SubType>Designer</SubType>
@@ -165,6 +168,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="StaffView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
