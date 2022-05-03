@@ -20,10 +20,12 @@ namespace Assignment2
     /// </summary>
     public partial class AddUnitView : UserControl
     {
+        Unit unit;
+
         public AddUnitView(Unit unit)
         {
             InitializeComponent();
-
+            this.unit = unit;
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

@@ -163,7 +163,7 @@ namespace Assignment2
                 else if (typeSelected == 'c')
                 {
                     List<Class> classList = (List<Class>)gridList.ItemsSource;
-                    AddClassView view = new AddClassView(classList[row.GetIndex()]);
+                    ClassView view = new ClassView(classList[row.GetIndex()]);
                     Body.setBody(view);
                 }
                 else if (typeSelected == 'o')
@@ -190,7 +190,7 @@ namespace Assignment2
             }
             else if (typeSelected == 'c')
             {
-                AddClassView view = new AddClassView(new Class());
+                ClassView view = new ClassView(new Class());
                 Body.setBody(view);
             }
             else if (typeSelected == 'o')
