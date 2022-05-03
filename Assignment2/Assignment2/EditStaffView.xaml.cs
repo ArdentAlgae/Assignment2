@@ -40,6 +40,7 @@ namespace Assignment2
             if (MessageBox.Show("Save class?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
                 Staff newStaff = new Staff();
+                newStaff.staffID = Int32.Parse(staffIDTextBox.Text);
 
                 EditStaffView view = new EditStaffView(newStaff);
                 Body.setBody(view);
@@ -47,6 +48,12 @@ namespace Assignment2
         }
 
         private void DiscardButton_Clicked(object sender, RoutedEventArgs e)
+        {
+            HomeView home = new HomeView();
+            Body.setBody(home);
+        }
+
+        private void BackButton_Clicked(object sender, RoutedEventArgs e)
         {
             HomeView home = new HomeView();
             Body.setBody(home);

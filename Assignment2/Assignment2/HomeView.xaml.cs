@@ -157,7 +157,7 @@ namespace Assignment2
                 else if (typeSelected == 's')
                 {
                     List<Staff> staffList = (List<Staff>)gridList.ItemsSource;
-                    EditStaffView view = new AddStaffView(staffList[row.GetIndex()]);
+                    EditStaffView view = new EditStaffView(staffList[row.GetIndex()]);
                     Body.setBody(view);
                 }
                 else if (typeSelected == 'c')
