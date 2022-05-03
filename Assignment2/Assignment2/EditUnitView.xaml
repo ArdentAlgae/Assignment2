@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Assignment2.AddUnitView"
+﻿<UserControl x:Class="Assignment2.EditUnitView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -14,7 +14,7 @@
         <TextBox x:Name="unitTitleTextBox" HorizontalAlignment="Left" Margin="120,80,0,0" VerticalAlignment="Top" Width="150"/>
         <TextBlock x:Name="unitCoordinatorHeader" Text="Unit Coordinator: " HorizontalAlignment="Left" Margin="20,100,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="unitCoordinatorTextBox" HorizontalAlignment="Left" Margin="120,100,0,0" VerticalAlignment="Top" Width="150"/>
-        <Button x:Name="createButton" Content="Create Unit" HorizontalAlignment="Left" Margin="212,324,0,0" VerticalAlignment="Top" Width="100" Click="createButton_Click"/>
-        <Button x:Name="discardButton" Content="Discard Unit" HorizontalAlignment="Left" Margin="404,324,0,0" VerticalAlignment="Top" Width="100" Click="DiscardButton_Clicked"/>
+        <Button x:Name="confirmButton" Content="Confirm Changes" HorizontalAlignment="Left" Margin="212,324,0,0" VerticalAlignment="Top" Width="100" Click="ConfirmButton_Clicked"/>
+        <Button x:Name="discardButton" Content="Discard Changes" HorizontalAlignment="Left" Margin="404,324,0,0" VerticalAlignment="Top" Width="100" Click="DiscardButton_Clicked"/>
     </Grid>
 </UserControl>
