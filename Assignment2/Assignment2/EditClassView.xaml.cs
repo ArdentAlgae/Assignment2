@@ -53,21 +53,29 @@ namespace Assignment2
                 newClass.type = typeTextBox.Text;
                 newClass.room = roomTextBox.Text;
                 newClass.staff = Int32.Parse(staffTextBox.Text);
-                using(var conn = new MySqlConnection("connectionString"))
+                using(var conn = new MySqlConnection("Database=hris;Data Source=alacritas.cis.utas.edu.au;User Id=kit206g2a;Password=group2a"))
                 {
                     conn.Open();
-                    var sql = "INSERT INTO class((unit_code, campus, day, start, end, type, room, staff) VALUES(@unitCode @campus @day @startTime @endTime @type @room @staff)";
-                    using(var cmd = new MySqlCommand(sql, conn))
+                    MySqlCommand cmd = new MySqlCommand("UPDATE unit_code, campus, day, start, end, type, room, staff from class", conn);
+
+                    MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
+                    DataTable dt = new DataTable("class");
+                    foreach(DataRow row in dt.Rows)
                     {
-                        cmd.Parameters.AddWithValue("@unitCode", newClass.unitCode);
-                        cmd.Parameters.AddWithValue("@campus", newClass.campus);
-                        cmd.Parameters.AddWithValue("@day", newClass.day);
-                        cmd.Parameters.AddWithValue("@startTime", newClass.startTime);
-                        cmd.Parameters.AddWithValue("@endTime", newClass.endTime);
-                        cmd.Parameters.AddWithValue("@type", newClass.type);
-                        cmd.Parameters.AddWithValue("@room", newClass.room);
-                        cmd.Parameters.AddWithValue("@staff", newClass.staff);
+                        if (sameClass(class_, row))
+                        {
+                            row["unit_code"] = newClass.unitCode;
+                            row["campus"] = newClass.campus;
+                            row["day"] = newClass.day;
+                            row["start_time"] = newClass.startTime;
+                            row["end_time"] = newClass.endTime;
+                            row["type"] = newClass.type;
+                            row["room"] = newClass.room;
+                            row["staff"] = newClass.staff;
+                        }
                     }
+                    adp.Update(dt);
+                    
                 }
 
                 ClassView view = new ClassView(newClass);
@@ -83,5 +91,44 @@ namespace Assignment2
                 Body.setBody(view);
             }
         }
+
+        private bool sameClass(Class class_, DataRow row)
+        {
+            bool isTrue = true;
+            if(class_.unitCode.Equals(row["unit_code"]))
+            {
+                isTrue = false;
+            }
+            else if (class_.campus.Equals(row["campus"]))
+            {
+                isTrue = false;
+            }
+            else if (class_.day.Equals(row["day"]))
+            {
+                isTrue = false;
+            }
+            else if (class_.startTime.Equals(row["start_time"]))
+            {
+                isTrue = false;
+            }
+            else if (class_.endTime.Equals(row["end_time"]))
+            {
+                isTrue = false;
+            }
+            else if (class_.type.Equals(row["type"]))
+            {
+                isTrue = false;
+            }
+            else if (class_.room.Equals(row["room"]))
+            {
+                isTrue = false;
+            }
+            else if (class_.staff.Equals(row["staff"]))
+            {
+                isTrue = false;
+            }
+            return isTrue;
+        }
+
     }
 }
