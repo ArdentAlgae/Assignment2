@@ -172,7 +172,7 @@ namespace Assignment2
                 }
                 else if (typeSelected == 's')
                 {
-                    EditStaffView view = new EditStaffView(new Staff(rowData));
+                    StaffView view = new StaffView(new Staff(rowData));
                     Body.setBody(view);
                 }
                 else if (typeSelected == 'c')

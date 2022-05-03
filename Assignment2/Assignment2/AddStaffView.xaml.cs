@@ -31,5 +31,15 @@ namespace Assignment2
             HomeView home = new HomeView();
             Body.setBody(home);
         }
+
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
