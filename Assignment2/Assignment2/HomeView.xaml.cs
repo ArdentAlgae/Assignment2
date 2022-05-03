@@ -167,7 +167,7 @@ namespace Assignment2
                 object[] rowData = rowView.Row.ItemArray;
                 if (typeSelected == 'u')
                 {
-                    AddUnitView view = new AddUnitView(new Unit(rowData));
+                    EditUnitView view = new EditUnitView(new Unit(rowData));
                     Body.setBody(view);
                 }
                 else if (typeSelected == 's')

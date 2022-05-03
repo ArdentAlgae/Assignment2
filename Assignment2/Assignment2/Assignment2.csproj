@@ -123,6 +123,9 @@
     <Compile Include="EditStaffView.xaml.cs">
       <DependentUpon>EditStaffView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EditUnitView.xaml.cs">
+      <DependentUpon>EditUnitView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Staff.cs" />
     <Compile Include="StaffView.xaml.cs">
       <DependentUpon>StaffView.xaml</DependentUpon>
@@ -153,6 +156,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="EditStaffView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditUnitView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
