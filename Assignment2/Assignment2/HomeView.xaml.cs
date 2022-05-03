@@ -12,6 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data;
+using MySql.Data.MySqlClient;
+using System.Data.SqlClient;
+
 
 namespace Assignment2
 {
@@ -25,116 +29,127 @@ namespace Assignment2
         {
             InitializeComponent();
 
-            gridList.ItemsSource = getStaff();
         }
 
-        List<Unit> getUnits()
+        void getUnits()
         {
-            List<Unit> units = new List<Unit>();
-            units.Add(new Unit()
+            MySqlConnection conn = new MySqlConnection("Database=hris;Data Source=alacritas.cis.utas.edu.au;User Id=kit206g2a;Password=group2a");
+
+            try
             {
-                unitCode = "KMA123",
-                unitName = "How to make jorts",
-                unitCoordinator = 456
-            });
-            units.Add(new Unit()
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT code, title, coordinator from unit", conn);
+                cmd.ExecuteNonQuery();
+
+                MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable("unit");
+                adp.Fill(dt);
+                gridList.ItemsSource = dt.DefaultView;
+                adp.Update(dt);
+
+                conn.Close();
+            }
+            catch (Exception ex)
             {
-                unitCode = "KMA789",
-                unitName = "How not to make jorts",
-                unitCoordinator = 101112
-            });
-            return units;
+                MessageBox.Show(ex.Message);
+            }
         }
 
-        List<Staff> getStaff()
+        void getStaff()
         {
-            List<Staff> units = new List<Staff>();
-            units.Add(new Staff()
+            MySqlConnection conn = new MySqlConnection("Database=hris;Data Source=alacritas.cis.utas.edu.au;User Id=kit206g2a;Password=group2a");
+
+            try
             {
-                staffID = 456,
-                givenName = "Frank",
-                familyName = "Jhonson",
-                title = "Prof.",
-                campus = "Sandy Bay",
-                phone = 1234567890,
-                room = "02GHT834",
-                email = "frank.jhonson@utas.edu.au"
-            });
-            units.Add(new Staff()
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT id, given_name, family_name, title, campus, phone, room, email, photo, category from staff", conn);
+                cmd.ExecuteNonQuery();
+
+                MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable("staff");
+                adp.Fill(dt);
+                gridList.ItemsSource = dt.DefaultView;
+                adp.Update(dt);
+
+                conn.Close();
+            }
+            catch (Exception ex)
             {
-                staffID = 101112,
-                givenName = "Craig",
-                familyName = "Phillips",
-                title = "Dr",
-                campus = "Launceston",
-                phone = 0987654321,
-                room = "03PWF175",
-                email = "Craig.Phillips2@utas.edu.au"
-            });
-            return units;
+                MessageBox.Show(ex.Message);
+            }
         }
 
-        List<Class> getClasses()
+        void getClasses()
         {
-            List<Class> units = new List<Class>();
-            units.Add(new Class()
+            MySqlConnection conn = new MySqlConnection("Database=hris;Data Source=alacritas.cis.utas.edu.au;User Id=kit206g2a;Password=group2a");
+
+            try
             {
-                unitCode = "KMA123",
-                campus = "Sandy Bay",
-                day = "Friday"
-            });
-            units.Add(new Class()
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT unit_code, campus, day, start, end, type, room, staff from class", conn);
+                cmd.ExecuteNonQuery();
+
+                MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable("class");
+                adp.Fill(dt);
+                gridList.ItemsSource = dt.DefaultView;
+                adp.Update(dt);
+
+                conn.Close();
+            }
+            catch (Exception ex)
             {
-                unitCode = "KMA789",
-                campus = "Launceston",
-                day = "Thursday"
-            });
-            return units;
+                MessageBox.Show(ex.Message);
+            }
         }
 
-        List<Consultation> getConsultations()
+        void getConsultations()
         {
-            List<Consultation> units = new List<Consultation>();
-            units.Add(new Consultation()
+            MySqlConnection conn = new MySqlConnection("Database=hris;Data Source=alacritas.cis.utas.edu.au;User Id=kit206g2a;Password=group2a");
+
+            try
             {
-                staffID = 456,
-                day = "Monday",
-                startTime = 13,
-                endTime = 15
-            });
-            units.Add(new Consultation()
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT staff_id, day, start, end from consultation", conn);
+                cmd.ExecuteNonQuery();
+
+                MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable("consultation");
+                adp.Fill(dt);
+                gridList.ItemsSource = dt.DefaultView;
+                adp.Update(dt);
+
+                conn.Close();
+            }
+            catch (Exception ex)
             {
-                staffID = 101112,
-                day = "Tuesday",
-                startTime = 9,
-                endTime = 11
-            });
-            return units;
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void click(object sender, RoutedEventArgs e)
         {
             if (sender.Equals(staffButton))
             {
-                gridList.ItemsSource = getStaff();
+                getStaff();
                 gridList.Items.Refresh();
                 typeSelected = 's';
             }
             else if (sender.Equals(unitButton))
             {
-                gridList.ItemsSource = getUnits();
+                getUnits();
                 gridList.Items.Refresh();
                 typeSelected = 'u';
             }
             else if (sender.Equals(classButton))
             {
-                gridList.ItemsSource = getClasses();
+                getClasses();
                 gridList.Items.Refresh();
                 typeSelected = 'c';
             }
             else if (sender.Equals(consultationButton))
             {
-                gridList.ItemsSource = getConsultations();
+                getConsultations();
                 gridList.Items.Refresh();
                 typeSelected = 'o';
             }
