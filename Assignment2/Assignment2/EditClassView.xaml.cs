@@ -33,11 +33,11 @@ namespace Assignment2
             unitCodeTextBox.Text = class_.unitCode;
             campusTextBox.Text = class_.campus;
             dayTextBox.Text = class_.day;
-            startTimeTextBox.Text = class_.startTime;
-            endTimeTextBox.Text = class_.endTime;
+            startTimeTextBox.Text = class_.startTime.ToString();
+            endTimeTextBox.Text = class_.endTime.ToString();
             typeTextBox.Text = class_.type;
             roomTextBox.Text = class_.room;
-            staffTextBox.Text = class_.staff;
+            staffTextBox.Text = class_.staff.ToString();
         }
 
         private void ConfirmButton_Clicked(object sender, RoutedEventArgs e)
@@ -52,7 +52,7 @@ namespace Assignment2
                 newClass.endTime = TimeSpan.Parse(endTimeTextBox.Text);
                 newClass.type = typeTextBox.Text;
                 newClass.room = roomTextBox.Text;
-                newClass.staff = staffTextBox.Text;
+                newClass.staff = Int32.Parse(staffTextBox.Text);
                 using(var conn = new MySqlConnection("Database=hris;Data Source=alacritas.cis.utas.edu.au;User Id=kit206g2a;Password=group2a"))
                 {
                     conn.Open();

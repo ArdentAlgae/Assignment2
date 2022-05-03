@@ -15,7 +15,7 @@ namespace Assignment2
         public TimeSpan endTime { get; set; }
         public string type { get; set; }
         public string room { get; set; }
-        public string staff { get; set; }
+        public int staff { get; set; }
         public Class()
         {
 
