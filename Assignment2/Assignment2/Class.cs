@@ -11,8 +11,8 @@ namespace Assignment2
         public string unitCode { get; set; }
         public string campus { get; set; }
         public string day { get; set; }
-        public string startTime { get; set; }
-        public string endTime { get; set; }
+        public TimeSpan startTime { get; set; }
+        public TimeSpan endTime { get; set; }
         public string type { get; set; }
         public string room { get; set; }
         public string staff { get; set; }
@@ -25,8 +25,11 @@ namespace Assignment2
             unitCode = (string)rowData[0];
             campus = (string)rowData[1];
             day = (string)rowData[2];
+            startTime = (TimeSpan) rowData[3];
+            endTime = (TimeSpan) rowData[4];
             type = (string)rowData[5];
             room = (string)rowData[6];
+            staff = (int)rowData[7];
         }
     }
 }
