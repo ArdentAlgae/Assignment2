@@ -8,6 +8,11 @@
         Title="MainWindow" Height="536.016" Width="800">
     <Grid>
         <StackPanel x:Name="BodyContainer" HorizontalAlignment="Left" Height="auto" VerticalAlignment="Top" Width="auto" Margin="0,80,0,0"/>
+        <Rectangle Fill="#FF4B4B4B" HorizontalAlignment="Left" Height="80" Stroke="Black" VerticalAlignment="Top" Width="792"/>
+        <TextBlock HorizontalAlignment="Left" Margin="25,5
+                   ,0,0" TextWrapping="Wrap" Text="University of Tasmania" VerticalAlignment="Top" Height="39" Width="297" Foreground="White" FontSize="30"/>
+        <TextBlock HorizontalAlignment="Left" Margin="25,44,0,0" TextWrapping="Wrap" Text="Human Resource Management System" VerticalAlignment="Top" Width="297" Foreground="White" FontSize="17"/>
+        <Button x:Name="LogoutButton" Content="Logout" HorizontalAlignment="Left" Margin="632,18,0,0" VerticalAlignment="Top" Width="128" Height="42" Click="LogoutButton_Click"/>
 
     </Grid>
 </Window>
