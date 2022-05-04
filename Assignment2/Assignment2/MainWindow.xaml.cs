@@ -32,5 +32,13 @@ namespace Assignment2
             BodyContainer.Children.Clear();
             BodyContainer.Children.Add(body);
         }
+
+        private void LogoutButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Logout HRIS?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                Application.Current.Shutdown();
+            }
+        }
     }
 }
