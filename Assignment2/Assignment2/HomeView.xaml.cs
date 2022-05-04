@@ -30,6 +30,30 @@ namespace Assignment2
             InitializeComponent();
             getStaff();
         }
+        public HomeView(char selected)
+        {
+            InitializeComponent();
+            if (selected == 'u')
+            {
+                getUnits();
+                typeSelected = 'u';
+            }
+            else if (selected == 'c')
+            {
+                getClasses();
+                typeSelected = 'c';
+            }
+            else if (selected == 'o')
+            {
+                getConsultations();
+                typeSelected = 'o';
+            }
+            else
+            {
+                getStaff();
+                typeSelected = 's';
+            }
+        }
 
         void getUnits()
         {
