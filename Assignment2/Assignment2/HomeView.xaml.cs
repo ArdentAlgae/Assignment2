@@ -28,7 +28,7 @@ namespace Assignment2
         public HomeView()
         {
             InitializeComponent();
-
+            getStaff();
         }
 
         void getUnits()
@@ -203,7 +203,7 @@ namespace Assignment2
             }
             else if (typeSelected == 'c')
             {
-                AddClassView view = new AddClassView(new Class());
+                EditClassView view = new EditClassView(new Class());
                 Body.setBody(view);
             }
             else if (typeSelected == 'o')

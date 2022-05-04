@@ -56,19 +56,49 @@ namespace Assignment2
                 using(var conn = new MySqlConnection("Database=hris;Data Source=alacritas.cis.utas.edu.au;User Id=kit206g2a;Password=group2a"))
                 {
                     conn.Open();
-                    MySqlCommand cmd = new MySqlCommand("UPDATE class" +
-                        " SET unit_code=@NewUnitCode," +
-                        " campus=@NewCampus," +
-                        " day=@NewDay," +
-                        " start=@NewStartTime," +
-                        " end=@NewEndTime," +
-                        " type=@NewType," +
-                        " room=@NewRoom," +
-                        " staff=@NewStaff" +
-                        " WHERE unit_code=@UnitCode" +
-                        " AND campus=@Campus" +
-                        " AND day=@Day" +
-                        " AND start=@StartTime", conn);
+                    MySqlCommand cmd;
+                    if (class_.unitCode == null && class_.campus == null && class_.day == null && class_.startTime.Equals(new TimeSpan()))
+                    {
+                        cmd = new MySqlCommand("INSERT INTO class" +
+                            " (unit_code," +
+                            " campus," +
+                            " day," +
+                            " start," +
+                            " end," +
+                            " type," +
+                            " room," +
+                            " staff)" +
+                            " VALUES" +
+                            " (@NewUnitCode," +
+                            " @NewCampus," +
+                            " @NewDay," +
+                            " @NewStartTime," +
+                            " @NewEndTime," +
+                            " @NewType," +
+                            " @NewRoom," +
+                            " @NewStaff)", conn);
+                    }
+                    else
+                    {
+                        cmd = new MySqlCommand("UPDATE class" +
+                            " SET unit_code=@NewUnitCode," +
+                            " campus=@NewCampus," +
+                            " day=@NewDay," +
+                            " start=@NewStartTime," +
+                            " end=@NewEndTime," +
+                            " type=@NewType," +
+                            " room=@NewRoom," +
+                            " staff=@NewStaff" +
+                            " WHERE unit_code=@UnitCode" +
+                            " AND campus=@Campus" +
+                            " AND day=@Day" +
+                            " AND start=@StartTime", conn);
+
+                        cmd.Parameters.AddWithValue("@UnitCode", class_.unitCode);
+                        cmd.Parameters.AddWithValue("@Campus", class_.campus);
+                        cmd.Parameters.AddWithValue("@Day", class_.day);
+                        cmd.Parameters.AddWithValue("@StartTime", class_.startTime);
+                    }
 
                     cmd.Parameters.AddWithValue("@NewUnitCode", newClass.unitCode);
                     cmd.Parameters.AddWithValue("@NewCampus", newClass.campus);
@@ -78,11 +108,6 @@ namespace Assignment2
                     cmd.Parameters.AddWithValue("@NewType", newClass.type);
                     cmd.Parameters.AddWithValue("@NewRoom", newClass.room);
                     cmd.Parameters.AddWithValue("@NewStaff", newClass.staff);
-
-                    cmd.Parameters.AddWithValue("@UnitCode", class_.unitCode);
-                    cmd.Parameters.AddWithValue("@Campus", class_.campus);
-                    cmd.Parameters.AddWithValue("@Day", class_.day);
-                    cmd.Parameters.AddWithValue("@StartTime", class_.startTime);
 
                     cmd.ExecuteNonQuery();
                     conn.Close();
