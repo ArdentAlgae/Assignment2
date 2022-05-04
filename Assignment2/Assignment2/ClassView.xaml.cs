@@ -12,6 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data;
+using MySql.Data.MySqlClient;
+using System.Data.SqlClient;
+using System.Collections.ObjectModel;
 
 namespace Assignment2
 {
@@ -52,8 +56,24 @@ namespace Assignment2
         {
             if (MessageBox.Show("Are you sure you want to delete this class? This cannot be undone.", "Confirmation", MessageBoxButton.OKCancel) == MessageBoxResult.Yes)
             {
-                DatabaseController.deleteClass(class_);
-                HomeView home = new HomeView();
+                using (var conn = new MySqlConnection("Database=hris;Data Source=alacritas.cis.utas.edu.au;User Id=kit206g2a;Password=group2a"))
+                {
+                    conn.Open();
+                    MySqlCommand cmd = new MySqlCommand("DELETE FROM class" +
+                            " WHERE unit_code=@UnitCode" +
+                            " AND campus=@Campus" +
+                            " AND day=@Day" +
+                            " AND start=@StartTime", conn);
+
+                    cmd.Parameters.AddWithValue("@UnitCode", class_.unitCode);
+                    cmd.Parameters.AddWithValue("@Campus", class_.campus);
+                    cmd.Parameters.AddWithValue("@Day", class_.day);
+                    cmd.Parameters.AddWithValue("@StartTime", class_.startTime);
+
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                }
+                    HomeView home = new HomeView();
                 Body.setBody(home);
             }
         }
