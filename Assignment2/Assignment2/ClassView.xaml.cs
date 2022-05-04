@@ -73,7 +73,7 @@ namespace Assignment2
                     cmd.ExecuteNonQuery();
                     conn.Close();
                 }
-                    HomeView home = new HomeView();
+                HomeView home = new HomeView();
                 Body.setBody(home);
             }
         }
