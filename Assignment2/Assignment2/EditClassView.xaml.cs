@@ -122,8 +122,16 @@ namespace Assignment2
         {
             if (MessageBox.Show("Discard changes?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                ClassView view = new ClassView(class_);
-                Body.setBody(view);
+                if (class_.unitCode == null && class_.campus == null && class_.day == null && class_.startTime.Equals(new TimeSpan()))
+                {
+                    HomeView home = new HomeView();
+                    Body.setBody(home);
+                }
+                else
+                {
+                    ClassView view = new ClassView(class_);
+                    Body.setBody(view);
+                }
             }
         }
 
